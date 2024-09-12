@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection,collectionData,doc, updateDoc, addDoc } from '@angular/fire/firestore';
 import { CollectionReference, DocumentData } from 'firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -22,8 +24,33 @@ export class CategoryService {
       .then(() => {
         this.toastr.success('New Category Saved Successfully')
       })
-      .catch((err) => {
+      .catch((err:any) => {
         console.log(err);
+      });
+  }
+
+  loadCategories(): Observable<any[]> {
+    const categoriesRef = collection(this.firestore, 'categories');
+    return collectionData(categoriesRef, { idField: 'id' }).pipe(
+      map((actions : unknown[]) => {
+        return actions.map((a : any) => {
+          const id = a.id; 
+          const data = a;  
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  updateCategory(id: string, updatedData: string): void {
+    const categoryDoc = doc(this.firestore, `categories/${id}`);
+    updateDoc(categoryDoc, {category : updatedData})
+      .then(() => {
+        this.toastr.success('Category Updated Successfully')
+      })
+      .catch((err:any) => {
+        console.log(err);
+        
       });
   }
 }

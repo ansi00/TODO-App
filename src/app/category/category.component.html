@@ -1,42 +1,49 @@
 <div class="row justify-content-center md-3">
     <div class="col-md-4 text-center">
-        <h1>TODO Categories</h1>
-        <p class="text-info">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea cum laborum ex?
-        </p>
+      <h1>TODO Categories</h1>
+      <p class="text-info">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea cum laborum ex?
+      </p>
     </div>
-</div>
-
-<div class="row">
+  </div>
+  
+  <div class="row">
     <div class="col-md-12">
-        <form class="d-flex w-100 align-items-center" #f = "ngForm" (ngSubmit)="onSubmit(f)">
-            <div class="form-group col-md-10 px-0">
-                <input name="categoryName" type="text" placeholder="Add new categories here" class="form-control w-100 drop-shadow" ngModel>
-            </div>
-            <button type="submit" class="btn btn-primary col-md-2 mls-2 btn-todo btn-block drop-shadow py-3">Add</button>
-        </form>
-    </div>
-</div>
-
-
-<div class="row categories-list">
-    <div class="col-md-3">
-        <div class="card drop-shadow">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="badge badge-primary">CATEGORY</div>
-                    <div class="cat-tools">
-                        <small> <i class="fa fa-pencil-alt text-success"></i></small>
-                        <small> <i class="fa fa-trash text-danger"></i></small>
-                    </div>
-                </div>
-
-                <div class="todo-content">
-                    <h3>Category</h3>
-                    <small class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit Odio reiciendis </small>
-                </div>
-                <span class="badge badge-danger">3 - todos</span>
-            </div>
+      <form class="d-flex w-100 align-items-center flex-wrap" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group col-md-10 px-0">
+          <input name="categoryName" type="text" placeholder="Add new categories here" 
+                 class="form-control w-100 drop-shadow" 
+                 [(ngModel)]="categoryName" required #category="ngModel" 
+                 [ngClass]="{'border-danger': f.submitted && category.invalid}">
         </div>
+        <button type="submit" class="btn btn-primary col-md-2 mls-2 btn-todo btn-block drop-shadow py-3">{{dataStatus}}</button>
+        <div class="form-group col-md-12 mt-2 text-danger" 
+             *ngIf="f.submitted && category.invalid && category.errors?.['required']">
+          Category is Required...
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  
+  <div class="row categories-list">
+    <div class="col-md-3" *ngFor="let category of categories">
+      <div class="card drop-shadow" [style.border-left-color]= 'category.colorCode'>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="badge badge-primary">CATEGORY</div>
+            <div class="cat-tools">
+              <small> <i class="fa fa-pencil-alt text-success" (click)="onEdit(category.category, category.id)"></i></small>
+              <small> <i class="fa fa-trash text-danger"></i></small>
+            </div>
+          </div>
+  
+          <div class="todo-content">
+            <h3 [style.color]= 'category.colorCode'>{{category.category}}</h3>
+            <small class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit Odio reiciendis </small>
+          </div>
+          <span class="badge badge-danger">{{category.todoCount}} - todos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
