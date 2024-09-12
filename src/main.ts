@@ -7,7 +7,7 @@ import { provideToastr } from 'ngx-toastr';
 bootstrapApplication(AppComponent, {
   providers: [
     ...appConfig.providers,
-    provideAnimations(),  // Provides BrowserAnimationsModule functionality
-    provideToastr()       // Provides ToastrModule functionality
+    provideAnimations(), 
+    provideToastr()      
   ]
 }).catch((err) => console.error(err));
