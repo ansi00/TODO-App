@@ -37,3 +37,14 @@ i {
     margin-right: 20px;
     display: inline-block;
 }
+
+.todo-list hr {
+    display: block ;
+    margin-top: -13px ;
+    margin-left: 30px ;
+    margin-right: auto ;
+    border-style: inset; 
+    border-width: 1px ;
+   background-color: black;
+    opacity: 1;
+}

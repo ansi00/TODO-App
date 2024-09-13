@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection,collectionData,doc, updateDoc, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection,collectionData,doc, updateDoc, addDoc, deleteDoc } from '@angular/fire/firestore';
 import { CollectionReference, DocumentData } from 'firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
@@ -25,7 +25,7 @@ export class CategoryService {
         this.toastr.success('New Category Saved Successfully')
       })
       .catch((err:any) => {
-        console.log(err);
+        console.log('Error saving category:', err);
       });
   }
 
@@ -49,8 +49,19 @@ export class CategoryService {
         this.toastr.success('Category Updated Successfully')
       })
       .catch((err:any) => {
-        console.log(err);
+        console.log('Error updating category:', err);
         
+      });
+  }
+
+  deleteCategory(id: string): void {
+    const categoryDoc = doc(this.firestore, `categories/${id}`);
+    deleteDoc(categoryDoc)
+      .then(() => {
+        this.toastr.error('Category Deleted Successfully');
+      })
+      .catch((err:any) => {
+        console.error('Error deleting category:', err);
       });
   }
 }

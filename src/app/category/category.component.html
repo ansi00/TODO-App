@@ -33,11 +33,11 @@
             <div class="badge badge-primary">CATEGORY</div>
             <div class="cat-tools">
               <small> <i class="fa fa-pencil-alt text-success" (click)="onEdit(category.category, category.id)"></i></small>
-              <small> <i class="fa fa-trash text-danger"></i></small>
+              <small> <i class="fa fa-trash text-danger"(click)="onDelete(category.id)"></i></small>
             </div>
           </div>
   
-          <div class="todo-content">
+          <div class="todo-content" [routerLink]="['/todo',category.id]" routerLinkActive="router-link-active" >
             <h3 [style.color]= 'category.colorCode'>{{category.category}}</h3>
             <small class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit Odio reiciendis </small>
           </div>
