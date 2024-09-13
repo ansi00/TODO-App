@@ -5,12 +5,10 @@ import { CommonModule } from '@angular/common';
 import { Category } from '../models/category.model';
 import { RouterModule } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [FormsModule, CommonModule,RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
@@ -21,9 +19,31 @@ export class CategoryComponent implements OnInit {
   catId: string = '';
 
   color: string[] = [
-    '#e7845e','#00CED1','#fc0184','#f6b93f','#9224a7','#20c898','#f03734','#aad450','#026467','#fefefe','#928779',
-    '#FCDEBE','#90A583','#B26E63','#C6CAED','#1E90FF','#32CD32','#FF4500','#FFD700','#8A2BE2','#FF6347','#3CB371',
-    '#6A5ACD','#D4D2A5','#FF1493',
+    '#e7845e',
+    '#00CED1',
+    '#fc0184',
+    '#f6b93f',
+    '#9224a7',
+    '#20c898',
+    '#f03734',
+    '#aad450',
+    '#026467',
+    '#fefefe',
+    '#928779',
+    '#FCDEBE',
+    '#90A583',
+    '#B26E63',
+    '#C6CAED',
+    '#1E90FF',
+    '#32CD32',
+    '#FF4500',
+    '#FFD700',
+    '#8A2BE2',
+    '#FF6347',
+    '#3CB371',
+    '#6A5ACD',
+    '#D4D2A5',
+    '#FF1493',
   ];
 
   constructor(private categoryService: CategoryService) {}
